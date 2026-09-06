@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Little Journey 💜</title>
+
+<style>
+
+/* =========================================================
+   FONTS
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Pacifico&display=swap');
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    color: #4d3768;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.45), transparent 25%),
+        radial-gradient(circle at 80% 30%, rgba(255,220,250,.45), transparent 30%),
+        linear-gradient(
+            135deg,
+            #c8a9dc 0%,
+            #d9b9e8 35%,
+            #c6a4db 65%,
+            #ad8ac7 100%
+        );
+}
+
+
+/* =========================================================
+   BACKGROUND JACARANDA EFFECT
+========================================================= */
+
+.sky {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    overflow: hidden;
+}
+
+/* distant trees */
+
+.tree {
+    position: absolute;
+    bottom: -40px;
+    width: 280px;
+    height: 400px;
+    opacity: .55;
+}
+
+.tree.left {
+    left: -80px;
+}
+
+.tree.right {
+    right: -80px;
+    transform: scaleX(-1);
+}
+
+.tree-top {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 40%, #8c5cb0 0 10%, transparent 11%),
+        radial-gradient(circle at 60% 25%, #a46bc1 0 12%, transparent 13%),
+        radial-gradient(circle at 75% 60%, #8050a2 0 12%, transparent 13%),
+        radial-gradient(circle at 35% 70%, #a871c3 0 10%, transparent 11%);
+    filter: blur(1px);
+}
+
+.tree-trunk {
+    position: absolute;
+    left: 115px;
+    bottom: 0;
+    width: 35px;
+    height: 240px;
+    border-radius: 20px;
+    background: #654c63;
+    transform: rotate(7deg);
+}
+
+
+/* =========================================================
+   FLOATING PETALS
+========================================================= */
+
+.petal {
+    position: fixed;
+    top: -30px;
+    z-index: 1;
+    pointer-events: none;
+    animation: fall linear infinite;
+    opacity: .75;
+}
+
+@keyframes fall {
+
+    0% {
+        transform:
+            translateY(-50px)
+            rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .8;
+    }
+
+    85% {
+        opacity: .7;
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            translateX(100px)
+            rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    gap: 25px;
+    padding: 30px;
+}
+
+
+/* =========================================================
+   LEFT JOURNEY MENU
+========================================================= */
+
+.sidebar {
+
+    width: 235px;
+    flex-shrink: 0;
+
+    background: rgba(255,255,255,.62);
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,.75);
+    border-radius: 28px;
+
+    padding: 25px 18px;
+
+    box-shadow:
+        0 20px 60px rgba(72,40,90,.15);
+
+    position: sticky;
+    top: 30px;
+
+    height: calc(100vh - 60px);
+
+    overflow-y: auto;
+}
+
+
+.logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo-flower {
+    font-size: 35px;
+}
+
+.logo h2 {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+    font-size: 22px;
+    color: #69448a;
+}
+
+.logo p {
+    font-size: 11px;
+    margin-top: 5px;
+    opacity: .7;
+}
+
+
+/* navigation */
+
+.nav-item {
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 11px 12px;
+    margin: 4px 0;
+
+    border-radius: 14px;
+
+    font-size: 13px;
+    color: #66497b;
+
+    transition: .25s;
+}
+
+.nav-item:hover {
+    background: rgba(255,255,255,.55);
+    transform: translateX(3px);
+}
+
+.nav-item.active {
+    background: rgba(218,186,232,.75);
+    font-weight: 600;
+}
+
+.nav-icon {
+    font-size: 18px;
+}
+
+.locked {
+    opacity: .6;
+}
+
+.nav-divider {
+    height: 1px;
+    background: rgba(105,68,138,.15);
+    margin: 15px 5px;
+}
+
+.sidebar-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Pacifico', cursive;
+    color: #795494;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.content {
+    flex: 1;
+    min-width: 0;
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: calc(100vh - 60px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+}
+
+
+.eyebrow {
+    letter-spacing: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    color: #69448a;
+}
+
+
+.hero h1 {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+
+    font-size: clamp(48px, 8vw, 88px);
+
+    color: #68418c;
+
+    text-shadow:
+        0 5px 20px rgba(85,47,120,.15);
+}
+
+
+.hero-text {
+    max-width: 650px;
+
+    margin: 20px auto 30px;
+
+    font-size: 17px;
+    line-height: 1.9;
+
+    color: #5d4770;
+}
+
+
+/* =========================================================
+   ANIMALS
+========================================================= */
+
+.animals {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    margin: 15px 0 30px;
+
+    font-size: 48px;
+}
+
+.animal {
+    display: inline-block;
+    animation: animalFloat 3s ease-in-out infinite;
+}
+
+.animal:nth-child(2) {
+    animation-delay: .5s;
+}
+
+.animal:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes animalFloat {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.countdown-card {
+
+    width: min(650px, 100%);
+
+    padding: 25px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.62);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255,255,255,.8);
+
+    box-shadow:
+        0 20px 50px rgba(77,45,100,.13);
+}
+
+
+.countdown-heading {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    font-size: 14px;
+
+    color: #74528c;
+}
+
+
+.countdown {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+
+.time {
+
+    padding: 16px 5px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.65);
+}
+
+
+.time strong {
+
+    display: block;
+
+    font-size: 32px;
+
+    color: #6c4491;
+}
+
+
+.time span {
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    color: #846b93;
+}
+
+
+/* =========================================================
+   LOCKED NOTE
+========================================================= */
+
+.lock-note {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    width: min(500px, 100%);
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.52);
+
+    border: 1px dashed rgba(104,65,140,.3);
+}
+
+
+.lock-note .lock {
+    font-size: 25px;
+}
+
+
+.lock-note h3 {
+
+    margin: 8px 0;
+
+    font-family: 'Pacifico', cursive;
+
+    font-weight: 400;
+
+    color: #704993;
+}
+
+
+.lock-note p {
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    opacity: .75;
+}
+
+
+/* =========================================================
+   DAILY LETTERS
+========================================================= */
+
+.section {
+
+    padding: 100px 20px;
+
+    min-height: 80vh;
+}
+
+
+.section-title {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+
+.section-title h2 {
+
+    font-family: 'Pacifico', cursive;
+
+    font-weight: 400;
+
+    font-size: 45px;
+
+    color: #69448a;
+}
+
+
+.section-title p {
+
+    margin-top: 8px;
+
+    font-size: 14px;
+
+    opacity: .75;
+}
+
+
+.letters {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+
+    gap: 20px;
+}
+
+
+.letter {
+
+    padding: 25px;
+
+    min-height: 210px;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,.58);
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,.8);
+
+    box-shadow:
+        0 15px 40px rgba(70,40,90,.1);
+
+    transition: .3s;
+}
+
+
+.letter:hover {
+
+    transform:
+        translateY(-6px)
+        rotate(-1deg);
+
+    box-shadow:
+        0 20px 50px rgba(70,40,90,.15);
+}
+
+
+.letter.locked-card {
+
+    opacity: .55;
+
+    filter: grayscale(.2);
+}
+
+
+.letter-icon {
+
+    font-size: 32px;
+
+    margin-bottom: 12px;
+}
+
+
+.letter h3 {
+
+    font-family: 'Pacifico', cursive;
+
+    font-weight: 400;
+
+    color: #6e478e;
+
+    margin-bottom: 8px;
+}
+
+
+.letter-date {
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    color: #9279a1;
+
+    margin-bottom: 12px;
+}
+
+
+.letter p {
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #62506c;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    font-family: 'Pacifico', cursive;
+
+    color: #69448a;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:850px) {
+
+    .page {
+        padding: 15px;
+        display: block;
+    }
+
+    .sidebar {
+
+        position: relative;
+
+        top: 0;
+
+        width: 100%;
+
+        height: auto;
+
+        margin-bottom: 20px;
+
+        overflow: hidden;
+    }
+
+    .nav {
+
+        display: flex;
+
+        overflow-x: auto;
+
+        gap: 5px;
+
+        padding-bottom: 5px;
+    }
+
+    .nav-item {
+
+        flex-shrink: 0;
+
+        white-space: nowrap;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .hero {
+        min-height: calc(100vh - 150px);
+    }
+}
+
+
+@media(max-width:500px) {
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .hero-text {
+        font-size: 14px;
+    }
+
+    .animals {
+        font-size: 38px;
+        gap: 12px;
+    }
+
+    .countdown {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .time strong {
+        font-size: 27px;
+    }
+
+    .section-title h2 {
+        font-size: 35px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="sky">
+
+    <div class="tree left">
+        <div class="tree-top"></div>
+        <div class="tree-trunk"></div>
+    </div>
+
+    <div class="tree right">
+        <div class="tree-top"></div>
+        <div class="tree-trunk"></div>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FLOATING PETALS
+===================================================== -->
+
+<script>
+
+const petals = [
+    "🌸",
+    "🪻",
+    "🌷",
+    "✿",
+    "❀"
+];
+
+for(let i = 0; i < 30; i++){
+
+    const petal =
+        document.createElement("div");
+
+    petal.className = "petal";
+
+    petal.innerText =
+        petals[
+            Math.floor(
+                Math.random() * petals.length
+            )
+        ];
+
+    petal.style.left =
+        Math.random() * 100 + "vw";
+
+    petal.style.fontSize =
+        (12 + Math.random() * 15) + "px";
+
+    petal.style.animationDuration =
+        (7 + Math.random() * 8) + "s";
+
+    petal.style.animationDelay =
+        Math.random() * 8 + "s";
+
+    document.body.appendChild(petal);
+}
+
+</script>
+
+
+<!-- =====================================================
+     PAGE
+===================================================== -->
+
+<div class="page">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-flower">
+            🪻
+        </div>
+
+        <h2>Our Little Journey</h2>
+
+        <p>made with a little love ♡</p>
+
+    </div>
+
+
+    <nav class="nav">
+
+        <div class="nav-item active">
+            <span class="nav-icon">⌂</span>
+            Home
+        </div>
+
+        <div class="nav-item">
+            <span class="nav-icon">🌱</span>
+            Day 1 · Sep 6
+        </div>
+
+        <div class="nav-item locked">
+            <span class="nav-icon">🔒</span>
+            Day 2 · Sep 7
+        </div>
+
+        <div class="nav-item locked">
+            <span class="nav-icon">🔒</span>
+            Day 3 · Sep 8
+        </div>
+
+        <div class="nav-item locked">
+            <span class="nav-icon">🔒</span>
+            Day 4 · Sep 9
+        </div>
+
+        <div class="nav-item locked">
+            <span class="nav-icon">🔒</span>
+            Day 5 · Sep 10
+        </div>
+
+        <div class="nav-item locked">
+            <span class="nav-icon">🔒</span>
+            Day 6 · Sep 11
+        </div>
+
+        <div class="nav-item locked">
+            <span class="nav-icon">🔒</span>
+            Day 7 · Sep 12
+        </div>
+
+        <div class="nav-item locked">
+            <span class="nav-icon">🔒</span>
+            Day 8 · Sep 13
+        </div>
+
+        <div class="nav-item locked">
+            <span class="nav-icon">🔒</span>
+            Day 9 · Sep 14
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-item locked">
+            <span class="nav-icon">🎁</span>
+            Final Surprise
+            🔒
+        </div>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+        Small letters...<br>
+        Big memories... ♡
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="content">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="home">
+
+    <div class="eyebrow">
+        ✦ A SPECIAL BIRTHDAY JOURNEY ✦
+    </div>
+
+
+    <h1>
+        Hey, Love ♡
+    </h1>
+
+
+    <p class="hero-text">
+
+        I made a little something for you...
+
+        <br>
+
+        A collection of letters, memories and
+        little surprises, just because you mean so much. 💜
+
+    </p>
+
+
+    <div class="animals">
+
+        <span class="animal">🐰</span>
+
+        <span>🌸</span>
+
+        <span class="animal">🐻</span>
+
+        <span>🪻</span>
+
+        <span class="animal">🐱</span>
+
+    </div>
+
+
+    <!-- COUNTDOWN -->
+
+    <div class="countdown-card">
+
+        <div class="countdown-heading">
+
+            🪻
+
+            <span>
+                Your birthday is in
+            </span>
+
+        </div>
+
+
+        <div class="countdown">
+
+            <div class="time">
+
+                <strong id="days">
+                    00
+                </strong>
+
+                <span>
+                    Days
+                </span>
+
+            </div>
+
+
+            <div class="time">
+
+                <strong id="hours">
+                    00
+                </strong>
+
+                <span>
+                    Hours
+                </span>
+
+            </div>
+
+
+            <div class="time">
+
+                <strong id="minutes">
+                    00
+                </strong>
+
+                <span>
+                    Minutes
+                </span>
+
+            </div>
+
+
+            <div class="time">
+
+                <strong id="seconds">
+                    00
+                </strong>
+
+                <span>
+                    Seconds
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOCKED SURPRISE -->
+
+    <div class="lock-note">
+
+        <div class="lock">
+            🔒
+        </div>
+
+        <h3>
+            Your surprise is locked...
+        </h3>
+
+        <p>
+            Come back tomorrow for
+            something new. ♡
+        </p>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     DAILY JOURNEY
+===================================================== -->
+
+<section class="section" id="journey">
+
+    <div class="section-title">
+
+        <h2>
+            Your Little Journey 🌸
+        </h2>
+
+        <p>
+            One little letter at a time...
+        </p>
+
+    </div>
+
+
+    <div class="letters">
+
+
+        <!-- DAY 1 -->
+
+        <article class="letter">
+
+            <div class="letter-icon">
+                🌱
+            </div>
+
+            <div class="letter-date">
+                SEPTEMBER 6 · DAY 1
+            </div>
+
+            <h3>
+                It Begins...
+            </h3>
+
+            <p>
+                Hey you. ♡
+
+                This is just the beginning
+                of a little journey I made
+                for you.
+
+                Come back tomorrow...
+                there's more waiting.
+            </p>
+
+        </article>
+
+
+        <!-- DAY 2 -->
+
+        <article class="letter locked-card">
+
+            <div class="letter-icon">
+                🌷
+            </div>
+
+            <div class="letter-date">
+                SEPTEMBER 7 · DAY 2
+            </div>
+
+            <h3>
+                A Little Thought
+            </h3>
+
+            <p>
+                🔒
+
+                This little letter isn't
+                ready yet.
+
+                Come back tomorrow.
+            </p>
+
+        </article>
+
+
+        <!-- DAY 3 -->
+
+        <article class="letter locked-card">
+
+            <div class="letter-icon">
+                🐻
+            </div>
+
+            <div class="letter-date">
+                SEPTEMBER 8 · DAY 3
+            </div>
+
+            <h3>
+                A Cute One
+            </h3>
+
+            <p>
+                🔒
+
+                Something cute is waiting
+                behind this door.
+            </p>
+
+        </article>
+
+
+        <!-- DAY 4 -->
+
+        <article class="letter locked-card">
+
+            <div class="letter-icon">
+                📸
+            </div>
+
+            <div class="letter-date">
+                SEPTEMBER 9 · DAY 4
+            </div>
+
+            <h3>
+                A Memory
+            </h3>
+
+            <p>
+                🔒
+
+                A little memory will
+                appear here.
+            </p>
+
+        </article>
+
+
+        <!-- DAY 5 -->
+
+        <article class="letter locked-card">
+
+            <div class="letter-icon">
+                🦋
+            </div>
+
+            <div class="letter-date">
+                SEPTEMBER 10 · DAY 5
+            </div>
+
+            <h3>
+                Something I Appreciate
+            </h3>
+
+            <p>
+                🔒
+
+                A little more of the
+                story is waiting here.
+            </p>
+
+        </article>
+
+
+        <!-- DAY 6 -->
+
+        <article class="letter locked-card">
+
+            <div class="letter-icon">
+                🌙
+            </div>
+
+            <div class="letter-date">
+                SEPTEMBER 11 · DAY 6
+            </div>
+
+            <h3>
+                A Midnight Letter
+            </h3>
+
+            <p>
+                🔒
+
+                This one is for a quiet
+                moment.
+            </p>
+
+        </article>
+
+
+        <!-- DAY 7 -->
+
+        <article class="letter locked-card">
+
+            <div class="letter-icon">
+                💜
+            </div>
+
+            <div class="letter-date">
+                SEPTEMBER 12 · DAY 7
+            </div>
+
+            <h3>
+                Almost There
+            </h3>
+
+            <p>
+                🔒
+
+                Only a couple more
+                sleeps...
+            </p>
+
+        </article>
+
+
+        <!-- DAY 8 -->
+
+        <article class="letter locked-card">
+
+            <div class="letter-icon">
+                🎁
+            </div>
+
+            <div class="letter-date">
+                SEPTEMBER 13 · DAY 8
+            </div>
+
+            <h3>
+                Tomorrow...
+            </h3>
+
+            <p>
+                🔒
+
+                One more sleep until
+                the big day.
+            </p>
+
+        </article>
+
+
+        <!-- DAY 9 -->
+
+        <article class="letter locked-card">
+
+            <div class="letter-icon">
+                🎂
+            </div>
+
+            <div class="letter-date">
+                SEPTEMBER 14 · DAY 9
+            </div>
+
+            <h3>
+                Your Day 💜
+            </h3>
+
+            <p>
+                🔒
+
+                The final chapter opens
+                on your birthday.
+            </p>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    Made under a sky full of
+    jacaranda flowers 🪻💜
+
+</footer>
+
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     COUNTDOWN JAVASCRIPT
+===================================================== -->
+
+<script>
+
+const birthday =
+    new Date(
+        "September 14, 2026 00:00:00"
+    ).getTime();
+
+
+function updateCountdown(){
+
+    const now =
+        new Date().getTime();
+
+    const difference =
+        birthday - now;
+
+
+    if(difference <= 0){
+
+        document.getElementById("days")
+            .innerText = "00";
+
+        document.getElementById("hours")
+            .innerText = "00";
+
+        document.getElementById("minutes")
+            .innerText = "00";
+
+        document.getElementById("seconds")
+            .innerText = "00";
+
+        return;
+    }
+
+
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    const hours =
+        Math.floor(
+            (difference /
+            (1000 * 60 * 60)) % 24
+        );
+
+
+    const minutes =
+        Math.floor(
+            (difference /
+            (1000 * 60)) % 60
+        );
+
+
+    const seconds =
+        Math.floor(
+            (difference / 1000) % 60
+        );
+
+
+    document.getElementById("days")
+        .innerText =
+        String(days).padStart(2,"0");
+
+
+    document.getElementById("hours")
+        .innerText =
+        String(hours).padStart(2,"0");
+
+
+    document.getElementById("minutes")
+        .innerText =
+        String(minutes).padStart(2,"0");
+
+
+    document.getElementById("seconds")
+        .innerText =
+        String(seconds).padStart(2,"0");
+
+}
+
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+</script>
+
+</body>
+</html>
