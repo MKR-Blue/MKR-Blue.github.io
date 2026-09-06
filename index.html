@@ -4,3639 +4,1283 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Our Little Journey 🪻</title>
+<title>A Little Place For You 🪻</title>
 
 <style>
 
-/* =========================================================
-   FONTS
-========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
-
-
-/* =========================================================
-   BASIC RESET
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html {
-    scroll-behavior: smooth;
+:root{
+    --purple:#9b72c7;
+    --deep-purple:#6f4b91;
+    --light-purple:#eadcf5;
+    --soft-purple:#f6effa;
+    --text:#493653;
+    --white:rgba(255,255,255,0.88);
 }
 
-body {
-    min-height: 100vh;
-
-    font-family: 'DM Sans', sans-serif;
-
-    color: #4f3a61;
-
-    overflow-x: hidden;
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    min-height:100vh;
+    color:var(--text);
 
     background:
-        radial-gradient(
-            circle at 20% 15%,
-            rgba(255,255,255,.55),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 80% 30%,
-            rgba(244,216,255,.45),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #c8a8da,
-            #e1c8ec,
-            #c9a7dc,
-            #b991cd
-        );
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,.65), transparent 25%),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.45), transparent 22%),
+        linear-gradient(135deg,#e9d5f1,#cba9df,#dcbce9,#f0ddf5);
+
+    background-attachment:fixed;
+    overflow-x:hidden;
 }
 
+/* Floating petals */
 
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
-.background {
-    position: fixed;
-    inset: 0;
-
-    z-index: -10;
-
-    overflow: hidden;
-
-    pointer-events: none;
+.petal{
+    position:fixed;
+    font-size:22px;
+    opacity:.35;
+    pointer-events:none;
+    animation:floatPetal linear infinite;
+    z-index:0;
 }
 
-.background-glow {
-    position: absolute;
+.p1{left:8%;top:10%;animation-duration:10s;}
+.p2{left:25%;top:75%;animation-duration:13s;}
+.p3{left:55%;top:20%;animation-duration:11s;}
+.p4{left:80%;top:65%;animation-duration:15s;}
+.p5{left:92%;top:15%;animation-duration:12s;}
 
-    width: 600px;
-    height: 600px;
-
-    border-radius: 50%;
-
-    top: -150px;
-    left: 35%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.35),
-            transparent 70%
-        );
+@keyframes floatPetal{
+    0%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-35px) rotate(100deg);}
+    100%{transform:translateY(0) rotate(200deg);}
 }
 
+/* Layout */
 
-/* =========================================================
-   JACARANDA TREES
-========================================================= */
-
-.tree {
-    position: absolute;
-
-    bottom: -30px;
-
-    width: 390px;
-    height: 480px;
-
-    opacity: .55;
+.app{
+    position:relative;
+    z-index:1;
+    display:flex;
+    min-height:100vh;
 }
 
-.tree-left {
-    left: -130px;
+/* Sidebar */
+
+.sidebar{
+    width:270px;
+    min-height:100vh;
+    padding:28px 18px;
+
+    background:rgba(111,75,145,.82);
+    backdrop-filter:blur(14px);
+
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    overflow-y:auto;
+
+    box-shadow:5px 0 25px rgba(60,30,80,.15);
 }
 
-.tree-right {
-    right: -130px;
-
-    transform: scaleX(-1);
+.logo{
+    text-align:center;
+    margin-bottom:28px;
 }
 
-.tree-crown {
-    position: absolute;
-
-    top: 0;
-    left: 15px;
-
-    width: 360px;
-    height: 300px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 20% 25%,
-            #9160aa 0 13%,
-            transparent 14%
-        ),
-        radial-gradient(
-            circle at 48% 18%,
-            #a574ba 0 14%,
-            transparent 15%
-        ),
-        radial-gradient(
-            circle at 75% 28%,
-            #87549f 0 14%,
-            transparent 15%
-        ),
-        radial-gradient(
-            circle at 30% 60%,
-            #a16dbc 0 13%,
-            transparent 14%
-        ),
-        radial-gradient(
-            circle at 62% 62%,
-            #8954a3 0 15%,
-            transparent 16%
-        ),
-        radial-gradient(
-            circle at 80% 70%,
-            #9b68b3 0 13%,
-            transparent 14%
-        );
+.logo .flower{
+    font-size:40px;
 }
 
-.tree-trunk {
-    position: absolute;
-
-    bottom: 0;
-    left: 155px;
-
-    width: 42px;
-    height: 270px;
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #665063,
-            #765d6b,
-            #594655
-        );
-
-    transform: rotate(6deg);
+.logo h2{
+    font-size:20px;
+    margin-top:5px;
 }
 
-
-/* =========================================================
-   FALLING PETALS
-========================================================= */
-
-.petal {
-    position: fixed;
-
-    top: -40px;
-
-    z-index: 5;
-
-    pointer-events: none;
-
-    opacity: .7;
-
-    animation:
-        fall linear infinite;
+.logo p{
+    font-size:12px;
+    opacity:.8;
+    margin-top:5px;
 }
 
-@keyframes fall {
+.nav-title{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    opacity:.65;
+    margin:20px 12px 9px;
+}
 
-    0% {
-        transform:
-            translateY(-50px)
-            rotate(0deg);
+.nav-btn{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:white;
+    padding:12px 14px;
+    margin:3px 0;
+    border-radius:14px;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    transition:.25s;
+}
 
-        opacity: 0;
+.nav-btn:hover{
+    background:rgba(255,255,255,.16);
+    transform:translateX(3px);
+}
+
+.nav-btn.active{
+    background:rgba(255,255,255,.24);
+}
+
+.nav-btn.locked{
+    opacity:.42;
+    cursor:not-allowed;
+}
+
+.nav-btn .emoji{
+    margin-right:9px;
+}
+
+.mega-nav{
+    margin-top:8px;
+    border:1px solid rgba(255,255,255,.22);
+}
+
+/* Main */
+
+.main{
+    margin-left:270px;
+    width:calc(100% - 270px);
+    padding:35px;
+}
+
+.page{
+    max-width:1050px;
+    margin:auto;
+}
+
+/* Hero */
+
+.hero{
+    min-height:310px;
+    border-radius:30px;
+
+    background:rgba(255,255,255,.62);
+    backdrop-filter:blur(15px);
+
+    padding:45px;
+    text-align:center;
+
+    box-shadow:0 15px 45px rgba(74,45,95,.13);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero .small{
+    font-size:14px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#76558f;
+}
+
+.hero h1{
+    font-family:Georgia,serif;
+    font-size:clamp(32px,5vw,58px);
+    margin:14px 0 10px;
+    color:#604477;
+}
+
+.hero p{
+    max-width:650px;
+    line-height:1.7;
+    font-size:16px;
+}
+
+/* Countdown */
+
+.countdown{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    margin-top:25px;
+    flex-wrap:wrap;
+}
+
+.time-box{
+    min-width:75px;
+    padding:14px 12px;
+    border-radius:17px;
+    background:rgba(255,255,255,.82);
+    box-shadow:0 5px 18px rgba(70,40,90,.08);
+}
+
+.time-box strong{
+    display:block;
+    font-size:27px;
+    color:#684985;
+}
+
+.time-box span{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    opacity:.65;
+}
+
+/* Today's gift */
+
+.today-card{
+    margin-top:25px;
+    background:rgba(255,255,255,.75);
+    border-radius:25px;
+    padding:28px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(74,45,95,.10);
+}
+
+.today-card h2{
+    font-family:Georgia,serif;
+    color:#684985;
+    margin-bottom:8px;
+}
+
+.gift-btn{
+    border:none;
+    margin-top:18px;
+    padding:15px 28px;
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#8b63ad,#a77ac5);
+    color:white;
+
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+
+    box-shadow:0 8px 20px rgba(95,60,120,.22);
+    transition:.25s;
+}
+
+.gift-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(95,60,120,.3);
+}
+
+/* Content card */
+
+.content-card{
+    margin-top:25px;
+    padding:35px;
+
+    background:rgba(255,255,255,.78);
+    border-radius:28px;
+
+    box-shadow:0 12px 35px rgba(74,45,95,.12);
+}
+
+.content-card h1{
+    font-family:Georgia,serif;
+    text-align:center;
+    color:#624477;
+    margin-bottom:8px;
+}
+
+.date-label{
+    text-align:center;
+    font-size:13px;
+    opacity:.6;
+    margin-bottom:25px;
+}
+
+.poem{
+    max-width:700px;
+    margin:0 auto;
+    text-align:center;
+    font-family:Georgia,serif;
+    font-size:19px;
+    line-height:2;
+    white-space:pre-line;
+    color:#5a4167;
+}
+
+.letter{
+    max-width:760px;
+    margin:auto;
+    font-size:17px;
+    line-height:1.9;
+    white-space:pre-line;
+}
+
+/* Images */
+
+.image-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:30px;
+}
+
+.image-grid.three{
+    grid-template-columns:repeat(3,1fr);
+}
+
+.image-grid img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    border-radius:22px;
+
+    box-shadow:0 8px 22px rgba(60,30,80,.13);
+
+    transition:.3s;
+}
+
+.image-grid img:hover{
+    transform:scale(1.025) rotate(.4deg);
+}
+
+/* Final */
+
+.final-card{
+    text-align:center;
+}
+
+.final-card .big-flower{
+    font-size:65px;
+    margin-bottom:15px;
+}
+
+.final-card h1{
+    font-size:42px;
+}
+
+.final-message{
+    font-family:Georgia,serif;
+    font-size:19px;
+    line-height:1.9;
+    max-width:720px;
+    margin:20px auto;
+}
+
+/* Back button */
+
+.back-btn{
+    display:block;
+    margin:25px auto 0;
+    border:none;
+    background:rgba(111,75,145,.1);
+    color:#654579;
+    padding:11px 20px;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+.back-btn:hover{
+    background:rgba(111,75,145,.18);
+}
+
+/* Mobile */
+
+.mobile-top{
+    display:none;
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:230px;
+        transform:translateX(-100%);
+        transition:.3s;
+        z-index:20;
     }
 
-    15% {
-        opacity: .8;
+    .sidebar.open{
+        transform:translateX(0);
     }
 
-    85% {
-        opacity: .7;
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:18px;
     }
 
-    100% {
-        transform:
-            translateY(110vh)
-            translateX(100px)
-            rotate(360deg);
-
-        opacity: 0;
-    }
-}
-
-
-/* =========================================================
-   MAIN LAYOUT
-========================================================= */
-
-.page {
-    min-height: 100vh;
-
-    display: flex;
-
-    gap: 25px;
-
-    padding: 25px;
-}
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-.sidebar {
-    width: 245px;
-
-    flex-shrink: 0;
-
-    height:
-        calc(100vh - 50px);
-
-    position: sticky;
-
-    top: 25px;
-
-    overflow-y: auto;
-
-    padding: 24px 17px;
-
-    border-radius: 28px;
-
-    background:
-        rgba(255,255,255,.68);
-
-    backdrop-filter:
-        blur(18px);
-
-    border:
-        1px solid
-        rgba(255,255,255,.8);
-
-    box-shadow:
-        0 20px 60px
-        rgba(70,40,90,.15);
-}
-
-
-/* =========================================================
-   LOGO
-========================================================= */
-
-.logo {
-    text-align: center;
-
-    margin-bottom: 22px;
-}
-
-.logo-flower {
-    font-size: 38px;
-
-    margin-bottom: 5px;
-}
-
-.logo h2 {
-    font-family:
-        'Pacifico', cursive;
-
-    font-size: 20px;
-
-    font-weight: 400;
-
-    color: #68428a;
-}
-
-.logo p {
-    font-size: 10px;
-
-    opacity: .7;
-
-    margin-top: 5px;
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-.nav {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 4px;
-}
-
-.nav-item {
-    width: 100%;
-
-    border: none;
-
-    background: transparent;
-
-    color: #604574;
-
-    font-family: inherit;
-
-    font-size: 12px;
-
-    text-align: left;
-
-    padding: 11px;
-
-    border-radius: 14px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    cursor: pointer;
-
-    transition: .25s ease;
-}
-
-.nav-item:hover:not(.locked) {
-    background:
-        rgba(255,255,255,.55);
-
-    transform:
-        translateX(4px);
-}
-
-.nav-item.active {
-    background:
-        rgba(216,188,231,.85);
-
-    color: #603d83;
-
-    font-weight: 600;
-}
-
-.nav-item.locked {
-    opacity: .45;
-
-    cursor: not-allowed;
-}
-
-.nav-icon {
-    width: 22px;
-
-    text-align: center;
-
-    font-size: 16px;
-}
-
-.nav-divider {
-    height: 1px;
-
-    background:
-        rgba(105,68,138,.15);
-
-    margin:
-        13px 5px;
-}
-
-.sidebar-bottom {
-    margin-top: 22px;
-
-    padding-top: 18px;
-
-    border-top:
-        1px solid
-        rgba(105,68,138,.12);
-
-    text-align: center;
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-size: 13px;
-
-    line-height: 1.7;
-
-    color: #76508e;
-}
-
-
-/* =========================================================
-   CONTENT
-========================================================= */
-
-.content {
-    flex: 1;
-
-    min-width: 0;
-
-    max-width: 1100px;
-
-    margin: auto;
-}
-
-
-/* =========================================================
-   ALL PAGES
-========================================================= */
-
-.page-section {
-    min-height: 100vh;
-
-    display: none;
-
-    padding:
-        70px 20px;
-}
-
-.page-section.active-page {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-}
-
-
-/* =========================================================
-   HOME
-========================================================= */
-
-.hero {
-    min-height:
-        calc(100vh - 50px);
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    text-align: center;
-
-    padding:
-        40px 20px;
-}
-
-.eyebrow {
-    font-size: 11px;
-
-    letter-spacing: 4px;
-
-    text-transform: uppercase;
-
-    color: #69458b;
-
-    margin-bottom: 16px;
-}
-
-.hero h1 {
-    font-family:
-        'Pacifico', cursive;
-
-    font-weight: 400;
-
-    font-size:
-        clamp(50px, 8vw, 88px);
-
-    line-height: 1.1;
-
-    color: #68418c;
-
-    text-shadow:
-        0 6px 20px
-        rgba(80,40,110,.15);
-}
-
-.hero-text {
-    max-width: 650px;
-
-    margin:
-        20px auto 25px;
-
-    font-size: 15px;
-
-    line-height: 1.9;
-
-    color: #5b456e;
-}
-
-
-/* =========================================================
-   ANIMALS
-========================================================= */
-
-.animals {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 17px;
-
-    margin:
-        8px 0 25px;
-
-    font-size: 42px;
-}
-
-.animal {
-    display: inline-block;
-
-    animation:
-        animalFloat 3s ease-in-out infinite;
-}
-
-.animal:nth-child(2) {
-    animation-delay: .5s;
-}
-
-.animal:nth-child(3) {
-    animation-delay: 1s;
-}
-
-@keyframes animalFloat {
-
-    0%,100% {
-        transform:
-            translateY(0);
+    .mobile-top{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        margin-bottom:15px;
     }
 
-    50% {
-        transform:
-            translateY(-9px);
-    }
-}
-
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-.countdown-card {
-    width:
-        min(650px,100%);
-
-    padding: 23px;
-
-    border-radius: 28px;
-
-    background:
-        rgba(255,255,255,.65);
-
-    backdrop-filter:
-        blur(15px);
-
-    border:
-        1px solid
-        rgba(255,255,255,.8);
-
-    box-shadow:
-        0 20px 50px
-        rgba(70,40,90,.13);
-}
-
-.countdown-heading {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 7px;
-
-    margin-bottom: 18px;
-
-    color: #74528c;
-
-    font-size: 13px;
-}
-
-.countdown {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap: 10px;
-}
-
-.time {
-    padding: 15px 5px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255,255,255,.65);
-}
-
-.time strong {
-    display: block;
-
-    font-size: 29px;
-
-    color: #6c4491;
-}
-
-.time span {
-    font-size: 9px;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-
-    color: #846b93;
-}
-
-
-/* =========================================================
-   SURPRISE CARDS
-========================================================= */
-
-.today-surprise,
-.mega-surprise {
-
-    width:
-        min(650px,100%);
-
-    margin-top: 18px;
-
-    padding: 23px;
-
-    text-align: center;
-
-    border-radius: 27px;
-
-    background:
-        rgba(255,255,255,.55);
-
-    backdrop-filter:
-        blur(15px);
-
-    border:
-        1px solid
-        rgba(255,255,255,.75);
-
-    box-shadow:
-        0 15px 40px
-        rgba(70,40,90,.12);
-
-    transition: .3s ease;
-}
-
-.today-surprise:hover {
-    transform:
-        translateY(-3px);
-}
-
-.surprise-icon {
-    font-size: 30px;
-
-    margin-bottom: 7px;
-}
-
-.today-surprise h3,
-.mega-surprise h3 {
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-weight: 400;
-
-    font-size: 21px;
-
-    color: #704691;
-
-    margin-bottom: 6px;
-}
-
-.today-surprise p,
-.mega-surprise p {
-
-    font-size: 11px;
-
-    color: #6e5978;
-
-    margin-bottom: 16px;
-
-    line-height: 1.7;
-}
-
-.surprise-button {
-
-    border: none;
-
-    padding:
-        12px 23px;
-
-    border-radius: 50px;
-
-    background:
-        rgba(111,70,145,.9);
-
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 11px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 8px 20px
-        rgba(90,50,120,.2);
-
-    transition: .25s ease;
-}
-
-.surprise-button:hover {
-
-    transform:
-        translateY(-2px)
-        scale(1.02);
-}
-
-.surprise-button:disabled {
-
-    cursor: not-allowed;
-
-    opacity: .55;
-
-    transform: none;
-}
-
-
-/* =========================================================
-   MEGA SURPRISE
-========================================================= */
-
-.mega-surprise {
-
-    border:
-        1px dashed
-        rgba(105,68,138,.3);
-}
-
-.mega-surprise.unlocked {
-
-    background:
-        rgba(255,245,255,.72);
-
-    border:
-        1px solid
-        rgba(145,100,165,.35);
-
-    animation:
-        gentleGlow 2.5s ease-in-out infinite;
-}
-
-@keyframes gentleGlow {
-
-    0%,100% {
-        box-shadow:
-            0 15px 40px
-            rgba(70,40,90,.12);
+    .menu-btn{
+        border:none;
+        background:rgba(255,255,255,.7);
+        border-radius:12px;
+        padding:10px 14px;
+        font-size:20px;
+        cursor:pointer;
     }
 
-    50% {
-        box-shadow:
-            0 20px 55px
-            rgba(120,70,150,.25);
-    }
-}
-
-
-/* =========================================================
-   DAILY PAGE
-========================================================= */
-
-.daily-container {
-    width:
-        min(850px,100%);
-}
-
-.daily-header {
-    text-align: center;
-
-    margin-bottom: 30px;
-}
-
-.daily-flower {
-    font-size: 37px;
-
-    margin-bottom: 8px;
-}
-
-.daily-header h2 {
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-weight: 400;
-
-    font-size:
-        clamp(35px,6vw,52px);
-
-    color: #68428a;
-}
-
-.daily-header p {
-
-    font-size: 12px;
-
-    margin-top: 7px;
-
-    opacity: .7;
-}
-
-
-/* =========================================================
-   MEMORY CARD
-========================================================= */
-
-.memory-card {
-
-    background:
-        rgba(255,255,255,.72);
-
-    backdrop-filter:
-        blur(15px);
-
-    border:
-        1px solid
-        rgba(255,255,255,.8);
-
-    border-radius: 28px;
-
-    padding: 35px;
-
-    box-shadow:
-        0 25px 70px
-        rgba(65,40,80,.16);
-}
-
-.poem-title {
-
-    text-align: center;
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-weight: 400;
-
-    font-size: 26px;
-
-    color: #704691;
-
-    margin-bottom: 22px;
-}
-
-.poem-text {
-
-    text-align: center;
-
-    font-size: 15px;
-
-    line-height: 2;
-
-    color: #62516b;
-
-    max-width: 650px;
-
-    margin:
-        auto auto 30px;
-}
-
-.poem-text p {
-
-    margin-bottom: 18px;
-}
-
-
-/* =========================================================
-   IMAGE GALLERY
-========================================================= */
-
-.gallery-title {
-
-    text-align: center;
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-weight: 400;
-
-    color: #76508f;
-
-    font-size: 20px;
-
-    margin:
-        20px 0 15px;
-}
-
-.gallery {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap: 14px;
-}
-
-.photo-slot {
-
-    aspect-ratio: 1 / 1;
-
-    overflow: hidden;
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e8d4ef,
-            #c8addc
-        );
-
-    border:
-        2px solid
-        rgba(255,255,255,.8);
-
-    box-shadow:
-        0 8px 20px
-        rgba(80,50,100,.1);
-}
-
-.photo-slot img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    display: block;
-
-    transition: .4s ease;
-}
-
-.photo-slot:hover img {
-
-    transform:
-        scale(1.05);
-}
-
-.image-note {
-
-    text-align: center;
-
-    font-size: 10px;
-
-    opacity: .6;
-
-    margin-top: 12px;
-}
-
-
-/* =========================================================
-   DAILY NAVIGATION
-========================================================= */
-
-.day-navigation {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    margin-top: 25px;
-}
-
-.day-nav-button {
-
-    border: none;
-
-    background:
-        rgba(255,255,255,.6);
-
-    color: #68428a;
-
-    padding:
-        12px 18px;
-
-    border-radius: 50px;
-
-    font-family: inherit;
-
-    cursor: pointer;
-
-    transition: .25s ease;
-}
-
-.day-nav-button:hover {
-
-    transform:
-        translateY(-2px);
-
-    background:
-        rgba(255,255,255,.8);
-}
-
-
-/* =========================================================
-   TODAY NOTE
-========================================================= */
-
-.note-container {
-
-    width:
-        min(760px,100%);
-}
-
-.note-heading {
-
-    text-align: center;
-
-    margin-bottom: 30px;
-}
-
-.note-heading .flower {
-
-    font-size: 38px;
-
-    margin-bottom: 8px;
-}
-
-.note-heading h2 {
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-size:
-        clamp(38px,6vw,55px);
-
-    font-weight: 400;
-
-    color: #68428a;
-}
-
-.note-heading p {
-
-    font-size: 12px;
-
-    opacity: .7;
-
-    margin-top: 7px;
-}
-
-
-/* =========================================================
-   LETTER PAPER
-========================================================= */
-
-.letter-paper {
-
-    position: relative;
-
-    padding:
-        50px 55px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fffdf9,
-            #fff9f5
-        );
-
-    border-radius: 8px;
-
-    box-shadow:
-        0 25px 70px
-        rgba(65,40,80,.18);
-
-    border:
-        1px solid
-        rgba(110,70,90,.12);
-
-    transform:
-        rotate(-.3deg);
-}
-
-.letter-paper::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 12px;
-
-    border:
-        1px dashed
-        rgba(120,80,120,.15);
-
-    pointer-events: none;
-}
-
-.tape {
-
-    position: absolute;
-
-    top: -14px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%)
-        rotate(-2deg);
-
-    width: 90px;
-
-    height: 28px;
-
-    background:
-        rgba(191,163,218,.75);
-
-    border-radius: 4px;
-}
-
-.letter-date {
-
-    text-align: right;
-
-    font-size: 10px;
-
-    letter-spacing: 1px;
-
-    color: #987da3;
-
-    margin-bottom: 24px;
-}
-
-.letter-paper h3 {
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-weight: 400;
-
-    font-size: 27px;
-
-    color: #68428a;
-
-    margin-bottom: 23px;
-}
-
-.letter-text {
-
-    font-size: 14px;
-
-    line-height: 2;
-
-    color: #62516b;
-}
-
-.letter-text p {
-
-    margin-bottom: 19px;
-}
-
-.signature {
-
-    margin-top: 30px;
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-size: 21px;
-
-    color: #76508f;
-
-    text-align: right;
-}
-
-
-/* =========================================================
-   MEGA PAGE
-========================================================= */
-
-.mega-container {
-
-    width:
-        min(800px,100%);
-
-    text-align: center;
-}
-
-.mega-intro {
-
-    margin-bottom: 30px;
-}
-
-.mega-intro .mega-symbol {
-
-    font-size: 55px;
-
-    margin-bottom: 12px;
-}
-
-.mega-intro h2 {
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-size:
-        clamp(40px,6vw,60px);
-
-    font-weight: 400;
-
-    color: #68428a;
-}
-
-.mega-intro p {
-
-    margin-top: 10px;
-
-    font-size: 13px;
-
-    opacity: .7;
-}
-
-
-/* =========================================================
-   MEGA LETTER
-========================================================= */
-
-.mega-letter {
-
-    text-align: left;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fffdf9,
-            #fff8fc
-        );
-
-    padding:
-        55px;
-
-    border-radius: 10px;
-
-    box-shadow:
-        0 30px 80px
-        rgba(65,40,80,.2);
-}
-
-.mega-letter h3 {
-
-    font-family:
-        'Pacifico', cursive;
-
-    font-size: 29px;
-
-    font-weight: 400;
-
-    color: #68428a;
-
-    margin-bottom: 25px;
-}
-
-.mega-letter p {
-
-    font-size: 15px;
-
-    line-height: 2;
-
-    color: #62516b;
-
-    margin-bottom: 20px;
-}
-
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
-.back-home {
-
-    margin-top: 25px;
-
-    border: none;
-
-    background:
-        rgba(255,255,255,.65);
-
-    color: #68428a;
-
-    padding:
-        12px 22px;
-
-    border-radius: 50px;
-
-    cursor: pointer;
-
-    font-family: inherit;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-
-    padding:
-        35px 20px;
-
-    text-align: center;
-
-    font-family:
-        'Pacifico', cursive;
-
-    color: #69448a;
-
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:850px) {
-
-    .page {
-
-        display: block;
-
-        padding: 12px;
+    .hero{
+        padding:30px 20px;
     }
 
-    .sidebar {
-
-        position: relative;
-
-        top: 0;
-
-        width: 100%;
-
-        height: auto;
-
-        margin-bottom: 12px;
+    .content-card{
+        padding:24px 17px;
     }
 
-    .nav {
-
-        flex-direction: row;
-
-        overflow-x: auto;
-
-        padding-bottom: 4px;
+    .image-grid,
+    .image-grid.three{
+        grid-template-columns:1fr;
     }
 
-    .nav-item {
-
-        flex-shrink: 0;
-
-        width: auto;
-
-        white-space: nowrap;
+    .poem{
+        font-size:17px;
     }
 
-    .sidebar-bottom {
-
-        display: none;
+    .letter{
+        font-size:16px;
     }
-
-    .page-section {
-
-        min-height:
-            calc(100vh - 150px);
-
-        padding:
-            50px 8px;
-    }
-}
-
-
-@media(max-width:550px) {
-
-    .hero h1 {
-
-        font-size: 48px;
-    }
-
-    .hero-text {
-
-        font-size: 13px;
-    }
-
-    .animals {
-
-        font-size: 34px;
-
-        gap: 9px;
-    }
-
-    .countdown {
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .time strong {
-
-        font-size: 26px;
-    }
-
-    .memory-card {
-
-        padding: 23px 17px;
-    }
-
-    .gallery {
-
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .letter-paper {
-
-        padding:
-            43px 25px;
-    }
-
-    .mega-letter {
-
-        padding:
-            35px 24px;
-    }
-
-    .day-navigation {
-
-        flex-direction: column;
-    }
-
 }
 
 </style>
 </head>
 
-
 <body>
 
+<!-- Floating flowers -->
 
-<!-- =========================================================
-     BACKGROUND
-========================================================= -->
-
-<div class="background">
-
-    <div class="background-glow"></div>
-
-
-    <div class="tree tree-left">
-
-        <div class="tree-crown"></div>
-
-        <div class="tree-trunk"></div>
-
-    </div>
+<div class="petal p1">🪻</div>
+<div class="petal p2">🌸</div>
+<div class="petal p3">🪻</div>
+<div class="petal p4">🌷</div>
+<div class="petal p5">🌸</div>
 
 
-    <div class="tree tree-right">
+<div class="app">
 
-        <div class="tree-crown"></div>
+<!-- ================= SIDEBAR ================= -->
 
-        <div class="tree-trunk"></div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     FALLING FLOWERS
-========================================================= -->
-
-<script>
-
-const petalTypes = [
-    "🌸",
-    "🪻",
-    "✿",
-    "❀",
-    "🌷"
-];
-
-for(let i = 0; i < 35; i++){
-
-    const petal =
-        document.createElement("div");
-
-    petal.className = "petal";
-
-    petal.innerText =
-        petalTypes[
-            Math.floor(
-                Math.random() *
-                petalTypes.length
-            )
-        ];
-
-    petal.style.left =
-        Math.random() * 100 + "vw";
-
-    petal.style.fontSize =
-        (12 + Math.random() * 14) + "px";
-
-    petal.style.animationDuration =
-        (7 + Math.random() * 9) + "s";
-
-    petal.style.animationDelay =
-        Math.random() * 10 + "s";
-
-    document.body.appendChild(petal);
-
-}
-
-</script>
-
-
-<!-- =========================================================
-     MAIN PAGE
-========================================================= -->
-
-<div class="page">
-
-
-<!-- =========================================================
-     SIDEBAR
-========================================================= -->
-
-<aside class="sidebar">
+<aside class="sidebar" id="sidebar">
 
     <div class="logo">
-
-        <div class="logo-flower">
-            🪻
-        </div>
-
-        <h2>
-            Our Little Journey
-        </h2>
-
-        <p>
-            made with a little love ♡
-        </p>
-
+        <div class="flower">🪻</div>
+        <h2>A Little Place For You</h2>
+        <p>made with a little love ♡</p>
     </div>
 
+    <div class="nav-title">Pages</div>
 
-    <nav class="nav">
+    <button class="nav-btn active" onclick="showHome()">
+        <span class="emoji">🏠</span> Home
+    </button>
 
+    <div class="nav-title">Your Little Poems</div>
 
-        <!-- HOME -->
+    <div id="dayNavigation"></div>
 
-        <button
-            class="nav-item active"
-            id="homeNav"
-            onclick="showPage('home',this)"
-        >
+    <div class="nav-title">The Big Day</div>
 
-            <span class="nav-icon">
-                🏡
-            </span>
-
-            Home
-
-        </button>
-
-
-        <!-- DAY 1 -->
-
-        <button
-            class="nav-item"
-            id="day1Nav"
-            onclick="openDay(1,this)"
-        >
-
-            <span class="nav-icon">
-                🌱
-            </span>
-
-            Day 1 · Sep 6
-
-        </button>
-
-
-        <!-- DAY 2 -->
-
-        <button
-            class="nav-item locked"
-            id="day2Nav"
-            onclick="openDay(2,this)"
-        >
-
-            <span class="nav-icon">
-                🔒
-            </span>
-
-            Day 2 · Sep 7
-
-        </button>
-
-
-        <!-- DAY 3 -->
-
-        <button
-            class="nav-item locked"
-            id="day3Nav"
-            onclick="openDay(3,this)"
-        >
-
-            <span class="nav-icon">
-                🔒
-            </span>
-
-            Day 3 · Sep 8
-
-        </button>
-
-
-        <!-- DAY 4 -->
-
-        <button
-            class="nav-item locked"
-            id="day4Nav"
-            onclick="openDay(4,this)"
-        >
-
-            <span class="nav-icon">
-                🔒
-            </span>
-
-            Day 4 · Sep 9
-
-        </button>
-
-
-        <!-- DAY 5 -->
-
-        <button
-            class="nav-item locked"
-            id="day5Nav"
-            onclick="openDay(5,this)"
-        >
-
-            <span class="nav-icon">
-                🔒
-            </span>
-
-            Day 5 · Sep 10
-
-        </button>
-
-
-        <!-- DAY 6 -->
-
-        <button
-            class="nav-item locked"
-            id="day6Nav"
-            onclick="openDay(6,this)"
-        >
-
-            <span class="nav-icon">
-                🔒
-            </span>
-
-            Day 6 · Sep 11
-
-        </button>
-
-
-        <!-- DAY 7 -->
-
-        <button
-            class="nav-item locked"
-            id="day7Nav"
-            onclick="openDay(7,this)"
-        >
-
-            <span class="nav-icon">
-                🔒
-            </span>
-
-            Day 7 · Sep 12
-
-        </button>
-
-
-        <!-- DAY 8 -->
-
-        <button
-            class="nav-item locked"
-            id="day8Nav"
-            onclick="openDay(8,this)"
-        >
-
-            <span class="nav-icon">
-                🔒
-            </span>
-
-            Day 8 · Sep 13
-
-        </button>
-
-
-        <!-- BIRTHDAY -->
-
-        <button
-            class="nav-item locked"
-            id="day9Nav"
-            onclick="openDay(9,this)"
-        >
-
-            <span class="nav-icon">
-                🔒
-            </span>
-
-            Birthday · Sep 14
-
-        </button>
-
-
-        <div class="nav-divider"></div>
-
-
-        <!-- TODAY'S POEM -->
-
-        <button
-            class="nav-item"
-            id="todayNav"
-            onclick="openTodayGift(this)"
-        >
-
-            <span class="nav-icon">
-                ✨
-            </span>
-
-            Today's Gift
-
-        </button>
-
-
-        <!-- MEGA SURPRISE -->
-
-        <button
-            class="nav-item locked"
-            id="megaNav"
-            onclick="openMega(this)"
-        >
-
-            <span class="nav-icon">
-                🔒
-            </span>
-
-            Mega Surprise
-
-        </button>
-
-    </nav>
-
-
-    <div class="sidebar-bottom">
-
-        Little letters...<br>
-
-        Big memories... ♡
-
-    </div>
+    <button
+        id="megaNav"
+        class="nav-btn mega-nav locked"
+        onclick="openMega()">
+        <span class="emoji">🎂</span> Mega Surprise 🔒
+    </button>
 
 </aside>
 
 
-<!-- =========================================================
-     CONTENT
-========================================================= -->
+<!-- ================= MAIN ================= -->
 
-<main class="content">
+<main class="main">
 
-
-<!-- =========================================================
-     HOME PAGE
-========================================================= -->
-
-<section
-    class="page-section active-page"
-    id="home"
->
-
-<div class="hero">
-
-
-    <div class="eyebrow">
-
-        ✦ A SPECIAL BIRTHDAY JOURNEY ✦
-
+    <div class="mobile-top">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <span>🪻 A Little Place For You</span>
+        <span></span>
     </div>
 
-
-    <h1>
-        Hey, Love ♡
-    </h1>
-
-
-    <p class="hero-text">
-
-        I made a little something for you...
-
-        <br>
-
-        A tiny collection of poems,
-        memories and surprises,
-        waiting one day at a time. 💜
-
-    </p>
-
-
-    <div class="animals">
-
-        <span class="animal">
-            🐰
-        </span>
-
-        <span>
-            🌸
-        </span>
-
-        <span class="animal">
-            🐻
-        </span>
-
-        <span>
-            🪻
-        </span>
-
-        <span class="animal">
-            🐱
-        </span>
-
-    </div>
-
-
-    <!-- COUNTDOWN -->
-
-    <div class="countdown-card">
-
-        <div class="countdown-heading">
-
-            🪻
-
-            <span>
-                Your birthday is in
-            </span>
-
-        </div>
-
-
-        <div class="countdown">
-
-            <div class="time">
-
-                <strong id="days">
-                    00
-                </strong>
-
-                <span>
-                    Days
-                </span>
-
-            </div>
-
-
-            <div class="time">
-
-                <strong id="hours">
-                    00
-                </strong>
-
-                <span>
-                    Hours
-                </span>
-
-            </div>
-
-
-            <div class="time">
-
-                <strong id="minutes">
-                    00
-                </strong>
-
-                <span>
-                    Minutes
-                </span>
-
-            </div>
-
-
-            <div class="time">
-
-                <strong id="seconds">
-                    00
-                </strong>
-
-                <span>
-                    Seconds
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- TODAY'S GIFT -->
-
-    <div class="today-surprise">
-
-        <div class="surprise-icon">
-            ✨
-        </div>
-
-        <h3>
-            A little gift for today
-        </h3>
-
-        <p>
-            I left a little note here just for you. 💜
-        </p>
-
-        <button
-            class="surprise-button"
-            onclick="openTodayGift()"
-        >
-            Open Today's Gift ✨
-        </button>
-
-    </div>
-
-
-    <!-- MEGA SURPRISE -->
-
-    <div
-        class="mega-surprise"
-        id="megaBox"
-    >
-
-        <div
-            class="surprise-icon"
-            id="megaIcon"
-        >
-            🎁
-        </div>
-
-        <h3 id="megaTitle">
-            Something Special Is Waiting
-        </h3>
-
-        <p id="megaText">
-            There is a little secret waiting
-            for September 14. 🪻
-        </p>
-
-        <button
-            class="surprise-button"
-            id="megaButton"
-            onclick="openMega()"
-            disabled
-        >
-            🔒 Not Yet
-        </button>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- =========================================================
-     DAILY MEMORY PAGE
-========================================================= -->
-
-<section
-    class="page-section"
-    id="dailyPage"
->
-
-<div class="daily-container">
-
-
-    <div class="daily-header">
-
-        <div
-            class="daily-flower"
-            id="dailyFlower"
-        >
-            🪻
-        </div>
-
-        <h2 id="dailyTitle">
-            Day 1
-        </h2>
-
-        <p id="dailyDate">
-            September 6
-        </p>
-
-    </div>
-
-
-    <div class="memory-card">
-
-
-        <div
-            class="poem-title"
-            id="poemTitle"
-        >
-            A Little Poem For You ♡
-        </div>
-
-
-        <div
-            class="poem-text"
-            id="poemText"
-        >
-
-            <p>
-                Among the flowers in a
-                jacaranda sky,
-                there's one little thought
-                I keep close by.
-            </p>
-
-            <p>
-                A smile that makes an ordinary
-                day feel bright,
-                a little piece of happiness
-                that makes everything feel right.
-            </p>
-
-            <p>
-                So here's a tiny poem,
-                wrapped in purple and blue,
-                just a little reminder
-                that today,
-                I'm thinking of you. 💜
-            </p>
-
-        </div>
-
-
-        <div class="gallery-title">
-
-            A little memory corner 🖼️
-
-        </div>
-
-
-        <div
-            class="gallery"
-            id="gallery"
-        >
-
-            <!-- IMAGE 1 -->
-
-            <div class="photo-slot">
-
-                <img
-                    src="images/day1-photo1.jpg"
-                    alt="Day 1 memory"
-                    onerror="this.src='https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=700&q=80'"
-                >
-
-            </div>
-
-
-            <!-- IMAGE 2 -->
-
-            <div class="photo-slot">
-
-                <img
-                    src="images/day1-photo2.jpg"
-                    alt="Day 1 memory"
-                    onerror="this.src='https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=700&q=80'"
-                >
-
-            </div>
-
-
-            <!-- IMAGE 3 -->
-
-            <div class="photo-slot">
-
-                <img
-                    src="images/day1-photo3.jpg"
-                    alt="Day 1 memory"
-                    onerror="this.src='https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=700&q=80'"
-                >
-
-            </div>
-
-        </div>
-
-
-        <p class="image-note">
-
-            💡 These are placeholder images.
-            Replace them with your own photos later.
-
-        </p>
-
-
-        <div class="day-navigation">
-
-            <button
-                class="day-nav-button"
-                onclick="showPage('home')"
-            >
-                ← Home
-            </button>
-
-
-            <button
-                class="day-nav-button"
-                id="nextDayButton"
-                onclick="nextDay()"
-            >
-                Next Day →
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- =========================================================
-     TODAY'S NOTE PAGE
-========================================================= -->
-
-<section
-    class="page-section"
-    id="todayPage"
->
-
-<div class="note-container">
-
-
-    <div class="note-heading">
-
-        <div class="flower">
-            ✨
-        </div>
-
-        <h2>
-            Today's Little Note
-        </h2>
-
-        <p id="todayDate">
-            September 6 · Day 1
-        </p>
-
-    </div>
-
-
-    <div class="letter-paper">
-
-        <div class="tape"></div>
-
-
-        <div
-            class="letter-date"
-            id="noteDate"
-        >
-            SEPTEMBER 6 · DAY 1
-        </div>
-
-
-        <h3>
-            Hey you, ♡
-        </h3>
-
-
-        <div
-            class="letter-text"
-            id="todayNote"
-        >
-
-            <p>
-                I know this is just a little website,
-                but I wanted to make something that
-                you could open every day.
-            </p>
-
-            <p>
-                So today, this is your first tiny
-                reminder that someone is thinking
-                about you.
-            </p>
-
-            <p>
-                There's still a whole journey ahead,
-                so don't rush through it. 🪻
-            </p>
-
-            <p>
-                Come back tomorrow.
-                I'll have something new waiting.
-            </p>
-
-        </div>
-
-
-        <div class="signature">
-
-            Until tomorrow... 💜
-
-        </div>
-
-    </div>
-
-
-    <button
-        class="back-home"
-        onclick="showPage('home')"
-    >
-
-        ← Back Home
-
-    </button>
-
-</div>
-
-</section>
-
-
-<!-- =========================================================
-     MEGA SURPRISE PAGE
-========================================================= -->
-
-<section
-    class="page-section"
-    id="megaPage"
->
-
-<div class="mega-container">
-
-
-    <div class="mega-intro">
-
-        <div class="mega-symbol">
-            🎁
-        </div>
-
-        <h2>
-            The Mega Surprise
-        </h2>
-
-        <p>
-            Finally... you made it here. 💜
-        </p>
-
-    </div>
-
-
-    <div class="mega-letter">
-
-        <h3>
-            Happy Birthday, Love ♡
-        </h3>
-
-
-        <!-- =================================================
-             WRITE YOUR REAL BIRTHDAY LETTER BELOW
-        ================================================= -->
-
-
-        <p>
-            My dearest,
-        </p>
-
-
-        <p>
-            Happy Birthday. 🎂💜
-        </p>
-
-
-        <p>
-            I wanted to make something a little
-            different for you this year.
-            Something you could discover slowly,
-            one little day at a time.
-        </p>
-
-
-        <p>
-            And now you've finally reached
-            the last page.
-        </p>
-
-
-        <p>
-            This is where you can write everything
-            you really want to tell her.
-        </p>
-
-
-        <p>
-            Thank you for all the little moments,
-            all the smiles, all the memories,
-            and for simply being you.
-        </p>
-
-
-        <p>
-            I hope your birthday is as lovely
-            and special as you are.
-        </p>
-
-
-        <p>
-            Happy Birthday once again. 🪻💜
-        </p>
-
-
-        <p style="
-            font-family:'Pacifico',cursive;
-            font-size:22px;
-            color:#76508f;
-            text-align:right;
-        ">
-
-            With all my love, ♡
-
-        </p>
-
-    </div>
-
-
-    <button
-        class="back-home"
-        onclick="showPage('home')"
-    >
-
-        ← Back Home
-
-    </button>
-
-</div>
-
-</section>
-
-
-<footer>
-
-    Made under a sky full of jacaranda flowers 🪻💜
-
-</footer>
-
+    <div class="page" id="page"></div>
 
 </main>
 
 </div>
 
 
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
 <script>
 
+/* ==========================================================
+   WEBSITE SETTINGS
+   ========================================================== */
 
-/* =========================================================
-   IMPORTANT DATES
-========================================================= */
+/*
+   Birthday:
+   14 September 2026
 
-const START_DATE =
-    new Date(
-        2026,
-        8,
-        6
+   Daily pages:
+   Day 1 = September 6
+   Day 2 = September 7
+   Day 3 = September 8
+   Day 4 = September 9
+   Day 5 = September 10
+   Day 6 = September 11
+   Day 7 = September 12
+   Day 8 = September 13
+
+   September 14 = MEGA SURPRISE
+*/
+
+const BIRTHDAY = new Date(2026, 8, 14, 0, 0, 0);
+
+
+/* ==========================================================
+   ✏️ EDIT YOUR POEMS AND LETTERS HERE
+   ========================================================== */
+
+const days = [
+
+{
+    number:1,
+    date:"September 6",
+    poem:`There are little moments,
+little smiles,
+little memories,
+that somehow become
+the brightest parts of a day.
+
+And somehow,
+you have become
+one of those beautiful parts
+of mine. 🪻`,
+    letter:`Hey you ♡
+
+This is the first little page of something I wanted to make for you.
+
+I know it is just a website, but I wanted every little part of it to feel like a tiny reminder that someone was thinking about you.
+
+So whenever you open this page, I hope it gives you a small reason to smile.
+
+This is only Day 1.
+
+There are still a few little surprises waiting for you.
+
+With lots of warmth,
+me ♡`
+},
+
+{
+    number:2,
+    date:"September 7",
+    poem:`Some people arrive
+like a quiet song,
+
+and somehow
+the world feels
+a little softer
+after they do. 🌷`,
+    letter:`Day 2 ♡
+
+Today I just wanted to remind you of something simple.
+
+You deserve good days,
+unexpected smiles,
+and moments that make you stop and think,
+
+"Today was a really nice day."
+
+I hope today gives you at least one of those moments.
+
+And if it doesn't,
+maybe this little page can be one. 🪻`
+},
+
+{
+    number:3,
+    date:"September 8",
+    poem:`If memories were flowers,
+I'd keep every one,
+
+and make a garden
+out of all the moments
+I never want to forget. 🌸`,
+    letter:`Day 3 ♡
+
+Three days already.
+
+I hope you are enjoying these tiny surprises.
+
+There are some things that are difficult to say in one big message, so I thought I would spread them across a few little days instead.
+
+One thought.
+One poem.
+One memory.
+One smile at a time.
+
+More is coming. ♡`
+},
+
+{
+    number:4,
+    date:"September 9",
+    poem:`A little laughter,
+a little chaos,
+a little sunshine,
+
+and somehow
+an ordinary day
+becomes a favourite memory. 🪻`,
+    letter:`Day 4 ♡
+
+Halfway through the little countdown.
+
+I hope these pages don't feel like just another website.
+
+I wanted them to feel more like a tiny corner of the internet that exists just for a few special memories.
+
+So take your time with each page.
+
+There is no rush. 🌷`
+},
+
+{
+    number:5,
+    date:"September 10",
+    poem:`You don't need
+a perfect day
+
+to make a day
+worth remembering.
+
+Sometimes,
+one beautiful moment
+is enough. 🌸`,
+    letter:`Day 5 ♡
+
+Today is another little reminder that the smallest things can mean a lot.
+
+A message.
+A laugh.
+A random memory.
+A silly conversation.
+
+Those little things often become the memories we keep coming back to.
+
+So here's to all the little things. 🪻`
+},
+
+{
+    number:6,
+    date:"September 11",
+    poem:`If happiness had
+a little garden,
+
+I think it would be
+filled with flowers,
+warm sunlight,
+and your favourite colours. 💜`,
+    letter:`Day 6 ♡
+
+Only a couple more pages before the big day.
+
+I hope by now you've realised that I put quite a bit of thought into this.
+
+There is still something waiting at the end.
+
+Until then,
+enjoy today's little piece of it. ♡`
+},
+
+{
+    number:7,
+    date:"September 12",
+    poem:`Some moments
+are photographs.
+
+Some moments
+are memories.
+
+And some moments
+quietly become
+part of who we are. 🌷`,
+    letter:`Day 7 ♡
+
+Almost there.
+
+Tomorrow is the last little page before the birthday surprise.
+
+I hope these little poems and letters have made the countdown a little more fun.
+
+One more day.
+
+Then the final surprise. 🪻`
+},
+
+{
+    number:8,
+    date:"September 13",
+    poem:`Tomorrow isn't
+just another day.
+
+It is a day worth celebrating,
+a day worth smiling for,
+and a day that deserves
+a little extra magic. 🌸`,
+    letter:`Day 8 ♡
+
+This is the last little page before your birthday.
+
+Tomorrow everything changes.
+
+No more countdown.
+No more locked page.
+No more waiting.
+
+Just one final surprise that I hope makes you smile.
+
+See you tomorrow. 💜`
+}
+
+];
+
+
+/* ==========================================================
+   🎂 FINAL BIRTHDAY LETTER
+   ========================================================== */
+
+const finalLetter = `Happy Birthday! ♡
+
+Today is your day.
+
+I wanted to make something a little different this year — something you could open one day at a time, with a tiny poem, a few pictures, and a few words waiting for you.
+
+Maybe it is not the biggest surprise in the world.
+
+But every little part of it was made with one simple thought:
+
+I wanted to make you smile.
+
+So here it is.
+
+Your little birthday corner of the internet. 🪻
+
+I hope this new year of your life brings you beautiful memories, peaceful days, lots of laughter, and countless reasons to smile.
+
+Keep being wonderfully you.
+
+Happy Birthday. 💜
+
+— from me ♡`;
+
+
+/* ==========================================================
+   DATE FUNCTIONS
+   ========================================================== */
+
+function todayOnly(){
+    const now = new Date();
+
+    return new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
     );
+}
 
-const BIRTHDAY =
-    new Date(
-        2026,
-        8,
-        14,
-        0,
-        0,
-        0
+function birthdayDate(){
+    return new Date(
+        BIRTHDAY.getFullYear(),
+        BIRTHDAY.getMonth(),
+        BIRTHDAY.getDate()
     );
+}
+
+function isBirthday(){
+    const today = todayOnly();
+    const birthday = birthdayDate();
+
+    return today.getTime() === birthday.getTime();
+}
+
+function daysUnlocked(){
+
+    const start = new Date(2026,8,6);
+    const today = todayOnly();
+
+    const difference =
+        Math.floor(
+            (today - start) /
+            (1000*60*60*24)
+        );
+
+    return difference + 1;
+}
 
 
-/* =========================================================
+/* ==========================================================
+   SIDEBAR
+   ========================================================== */
+
+function createNavigation(){
+
+    const nav = document.getElementById("dayNavigation");
+
+    nav.innerHTML = "";
+
+    const unlocked = daysUnlocked();
+
+    days.forEach(day => {
+
+        const button = document.createElement("button");
+
+        const available =
+            day.number <= unlocked &&
+            !isBirthday();
+
+        button.className =
+            "nav-btn" +
+            (available ? "" : " locked");
+
+        button.innerHTML =
+            `<span class="emoji">🌷</span>
+             Day ${day.number} · ${day.date}
+             ${available ? "" : " 🔒"}`;
+
+        if(available){
+            button.onclick = () => openDay(day.number);
+        }
+
+        nav.appendChild(button);
+    });
+
+
+    const mega = document.getElementById("megaNav");
+
+    if(isBirthday()){
+
+        mega.classList.remove("locked");
+
+        mega.innerHTML =
+            `<span class="emoji">🎂</span>
+             Mega Surprise ✨`;
+
+    }else{
+
+        mega.classList.add("locked");
+
+        mega.innerHTML =
+            `<span class="emoji">🎂</span>
+             Mega Surprise 🔒`;
+
+    }
+}
+
+
+/* ==========================================================
+   HOME
+   ========================================================== */
+
+function showHome(){
+
+    closeSidebar();
+
+    const today = todayOnly();
+
+    let todayNumber = daysUnlocked();
+
+    if(todayNumber < 1){
+        todayNumber = 1;
+    }
+
+    if(todayNumber > 8){
+        todayNumber = 8;
+    }
+
+    let homeMessage =
+        "A little place filled with tiny surprises, poems and memories.";
+
+    if(isBirthday()){
+        homeMessage =
+            "Today is finally here. Your big surprise is waiting. 🎂";
+    }
+
+    document.getElementById("page").innerHTML = `
+
+        <section class="hero">
+
+            <div class="small">
+                a tiny corner made just for you
+            </div>
+
+            <h1>Hey, you. 🪻</h1>
+
+            <p>
+                ${homeMessage}
+            </p>
+
+            <div class="countdown">
+
+                <div class="time-box">
+                    <strong id="days">00</strong>
+                    <span>Days</span>
+                </div>
+
+                <div class="time-box">
+                    <strong id="hours">00</strong>
+                    <span>Hours</span>
+                </div>
+
+                <div class="time-box">
+                    <strong id="minutes">00</strong>
+                    <span>Minutes</span>
+                </div>
+
+                <div class="time-box">
+                    <strong id="seconds">00</strong>
+                    <span>Seconds</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        ${
+            isBirthday()
+            ?
+            `
+            <section class="today-card">
+
+                <h2>🎂 It's finally here</h2>
+
+                <p>
+                    Your birthday surprise is ready.
+                </p>
+
+                <button
+                    class="gift-btn"
+                    onclick="openMega()">
+
+                    ✨ OPEN MEGA SURPRISE ✨
+
+                </button>
+
+            </section>
+            `
+            :
+            `
+            <section class="today-card">
+
+                <h2>💌 Your little gift for today</h2>
+
+                <p>
+                    A letter is waiting for you.
+                </p>
+
+                <button
+                    class="gift-btn"
+                    onclick="openTodayGift()">
+
+                    💌 OPEN TODAY'S GIFT
+
+                </button>
+
+            </section>
+            `
+        }
+
+    `;
+
+    startCountdown();
+}
+
+
+/* ==========================================================
+   TODAY'S LETTER
+   ========================================================== */
+
+function openTodayGift(){
+
+    if(isBirthday()){
+        openMega();
+        return;
+    }
+
+    let number = daysUnlocked();
+
+    if(number < 1){
+        number = 1;
+    }
+
+    if(number > 8){
+        number = 8;
+    }
+
+    const day = days[number-1];
+
+    closeSidebar();
+
+    document.getElementById("page").innerHTML = `
+
+        <section class="content-card">
+
+            <h1>💌 Today's Little Gift</h1>
+
+            <div class="date-label">
+                ${day.date}
+            </div>
+
+            <div class="letter">
+                ${day.letter}
+            </div>
+
+            <button
+                class="back-btn"
+                onclick="showHome()">
+
+                ← Back Home
+
+            </button>
+
+        </section>
+
+    `;
+}
+
+
+/* ==========================================================
+   DAILY POEM PAGE
+   ========================================================== */
+
+function openDay(number){
+
+    const unlocked = daysUnlocked();
+
+    if(number > unlocked || isBirthday()){
+        return;
+    }
+
+    const day = days[number-1];
+
+    closeSidebar();
+
+    document.getElementById("page").innerHTML = `
+
+        <section class="content-card">
+
+            <h1>🌷 Day ${day.number}</h1>
+
+            <div class="date-label">
+                ${day.date}
+            </div>
+
+            <div class="poem">
+                ${day.poem}
+            </div>
+
+            <div class="image-grid">
+
+                <img
+                    src="images/day${day.number}-photo1.jpg"
+                    alt="A special memory">
+
+                <img
+                    src="images/day${day.number}-photo2.jpg"
+                    alt="A special memory">
+
+            </div>
+
+            <button
+                class="back-btn"
+                onclick="showHome()">
+
+                ← Back Home
+
+            </button>
+
+        </section>
+
+    `;
+}
+
+
+/* ==========================================================
+   🎂 MEGA SURPRISE
+   ========================================================== */
+
+function openMega(){
+
+    if(!isBirthday()){
+        alert(
+            "Not yet 🪻\n\n" +
+            "The Mega Surprise opens on September 14."
+        );
+
+        return;
+    }
+
+    closeSidebar();
+
+    document.getElementById("page").innerHTML = `
+
+        <section class="content-card final-card">
+
+            <div class="big-flower">
+                🪻🌷🌸
+            </div>
+
+            <h1>🎂 Your Mega Surprise</h1>
+
+            <p class="final-message">
+                Today is the day.
+                <br><br>
+                Everything was waiting for this moment.
+                <br><br>
+                So take a breath...
+                <br>
+                and open your final little surprise. 💜
+            </p>
+
+            <div class="letter">
+                ${finalLetter}
+            </div>
+
+            <div class="image-grid three">
+
+                <img
+                    src="images/final-photo1.jpg"
+                    alt="Birthday memory">
+
+                <img
+                    src="images/final-photo2.jpg"
+                    alt="Birthday memory">
+
+                <img
+                    src="images/final-photo3.jpg"
+                    alt="Birthday memory">
+
+            </div>
+
+            <button
+                class="back-btn"
+                onclick="showHome()">
+
+                ← Back Home
+
+            </button>
+
+        </section>
+
+    `;
+}
+
+
+/* ==========================================================
    COUNTDOWN
-========================================================= */
+   ========================================================== */
 
-function updateCountdown(){
+function startCountdown(){
 
-    const now =
-        new Date();
+    const timer = setInterval(() => {
 
-    const difference =
-        BIRTHDAY.getTime()
-        -
-        now.getTime();
+        const now = new Date();
+        const difference = BIRTHDAY - now;
 
+        if(
+            !document.getElementById("days")
+        ){
+            clearInterval(timer);
+            return;
+        }
 
-    if(difference <= 0){
+        if(difference <= 0){
 
-        document.getElementById("days")
-            .innerText = "00";
+            document.getElementById("days").textContent = "00";
+            document.getElementById("hours").textContent = "00";
+            document.getElementById("minutes").textContent = "00";
+            document.getElementById("seconds").textContent = "00";
 
-        document.getElementById("hours")
-            .innerText = "00";
+            return;
+        }
 
-        document.getElementById("minutes")
-            .innerText = "00";
-
-        document.getElementById("seconds")
-            .innerText = "00";
-
-        return;
-
-    }
-
-
-    const days =
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        );
-
-
-    const hours =
-        Math.floor(
-            (
+        const daysLeft =
+            Math.floor(
                 difference /
-                (1000 * 60 * 60)
-            ) % 24
-        );
+                (1000*60*60*24)
+            );
 
+        const hoursLeft =
+            Math.floor(
+                (difference /
+                (1000*60*60)) % 24
+            );
 
-    const minutes =
-        Math.floor(
-            (
-                difference /
-                (1000 * 60)
-            ) % 60
-        );
+        const minutesLeft =
+            Math.floor(
+                (difference /
+                (1000*60)) % 60
+            );
 
+        const secondsLeft =
+            Math.floor(
+                (difference / 1000) % 60
+            );
 
-    const seconds =
-        Math.floor(
-            (
-                difference /
-                1000
-            ) % 60
-        );
+        document.getElementById("days").textContent =
+            String(daysLeft).padStart(2,"0");
 
+        document.getElementById("hours").textContent =
+            String(hoursLeft).padStart(2,"0");
 
-    document.getElementById("days")
-        .innerText =
-        String(days)
-        .padStart(2,"0");
+        document.getElementById("minutes").textContent =
+            String(minutesLeft).padStart(2,"0");
 
+        document.getElementById("seconds").textContent =
+            String(secondsLeft).padStart(2,"0");
 
-    document.getElementById("hours")
-        .innerText =
-        String(hours)
-        .padStart(2,"0");
-
-
-    document.getElementById("minutes")
-        .innerText =
-        String(minutes)
-        .padStart(2,"0");
-
-
-    document.getElementById("seconds")
-        .innerText =
-        String(seconds)
-        .padStart(2,"0");
-
+    },1000);
 }
 
 
-updateCountdown();
+/* ==========================================================
+   MOBILE MENU
+   ========================================================== */
 
-setInterval(
-    updateCountdown,
-    1000
-);
-
-
-/* =========================================================
-   CALCULATE WHICH DAY IS UNLOCKED
-========================================================= */
-
-function getUnlockedDay(){
-
-    const today =
-        new Date();
-
-    const current =
-        new Date(
-            today.getFullYear(),
-            today.getMonth(),
-            today.getDate()
-        );
-
-
-    if(current < START_DATE){
-
-        return 0;
-
-    }
-
-
-    const difference =
-        current.getTime()
-        -
-        START_DATE.getTime();
-
-
-    return Math.min(
-        9,
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        ) + 1
-    );
-
-}
-
-
-/* =========================================================
-   SHOW PAGE
-========================================================= */
-
-function showPage(
-    pageId,
-    button = null
-){
+function toggleSidebar(){
 
     document
-        .querySelectorAll(".page-section")
-        .forEach(section => {
+        .getElementById("sidebar")
+        .classList.toggle("open");
 
-            section.classList.remove(
-                "active-page"
-            );
+}
 
-        });
-
-
-    const page =
-        document.getElementById(
-            pageId
-        );
-
-
-    if(page){
-
-        page.classList.add(
-            "active-page"
-        );
-
-    }
-
+function closeSidebar(){
 
     document
-        .querySelectorAll(".nav-item")
-        .forEach(item => {
-
-            item.classList.remove(
-                "active"
-            );
-
-        });
-
-
-    if(button){
-
-        button.classList.add(
-            "active"
-        );
-
-    }
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+        .getElementById("sidebar")
+        .classList.remove("open");
 
 }
 
 
-/* =========================================================
-   DAILY CONTENT
-========================================================= */
-
-const days = {
-
-
-1: {
-
-    title:
-        "A Little Poem For You",
-
-    date:
-        "September 6 · Day 1",
-
-    flower:
-        "🪻",
-
-    poem: `
-
-        <p>
-            Among the flowers in a
-            jacaranda sky,
-            there's one little thought
-            I keep close by.
-        </p>
-
-        <p>
-            A smile that makes an ordinary
-            day feel bright,
-            a little piece of happiness
-            that makes everything feel right.
-        </p>
-
-        <p>
-            So here's a tiny poem,
-            wrapped in purple and blue,
-            just a little reminder
-            that today,
-            I'm thinking of you. 💜
-        </p>
-
-    `,
-
-    images: [
-
-        "images/day1-photo1.jpg",
-
-        "images/day1-photo2.jpg",
-
-        "images/day1-photo3.jpg"
-
-    ]
-
-},
-
-
-2: {
-
-    title:
-        "Another Little Thought",
-
-    date:
-        "September 7 · Day 2",
-
-    flower:
-        "🌷",
-
-    poem: `
-
-        <p>
-            Another day has quietly arrived,
-            another little page comes alive.
-        </p>
-
-        <p>
-            I could write a thousand things,
-            but somehow the simplest words
-            are the ones that matter.
-        </p>
-
-        <p>
-            So today, this little poem
-            is simply here to remind you:
-            you are thought of,
-            appreciated,
-            and celebrated. 💜
-        </p>
-
-    `,
-
-    images: [
-
-        "images/day2-photo1.jpg",
-
-        "images/day2-photo2.jpg",
-
-        "images/day2-photo3.jpg"
-
-    ]
-
-},
-
-
-3: {
-
-    title:
-        "A Little Smile",
-
-    date:
-        "September 8 · Day 3",
-
-    flower:
-        "🌸",
-
-    poem: `
-
-        <p>
-            If this little page
-            made you smile today,
-            then perhaps
-            it did its job.
-        </p>
-
-        <p>
-            Because sometimes
-            the smallest things
-            become the sweetest memories.
-        </p>
-
-    `,
-
-    images: [
-
-        "images/day3-photo1.jpg",
-
-        "images/day3-photo2.jpg",
-
-        "images/day3-photo3.jpg"
-
-    ]
-
-},
-
-
-4: {
-
-    title:
-        "A Memory",
-
-    date:
-        "September 9 · Day 4",
-
-    flower:
-        "🪻",
-
-    poem: `
-
-        <p>
-            Some moments disappear
-            into yesterday,
-            while others quietly
-            stay with us.
-        </p>
-
-        <p>
-            Today is for one of those
-            little moments.
-        </p>
-
-    `,
-
-    images: [
-
-        "images/day4-photo1.jpg",
-
-        "images/day4-photo2.jpg",
-
-        "images/day4-photo3.jpg"
-
-    ]
-
-},
-
-
-5: {
-
-    title:
-        "Something Special",
-
-    date:
-        "September 10 · Day 5",
-
-    flower:
-        "🌷",
-
-    poem: `
-
-        <p>
-            No special reason,
-            no special occasion,
-            just a little reminder
-            that you matter.
-        </p>
-
-    `,
-
-    images: [
-
-        "images/day5-photo1.jpg",
-
-        "images/day5-photo2.jpg",
-
-        "images/day5-photo3.jpg"
-
-    ]
-
-},
-
-
-6: {
-
-    title:
-        "A Quiet Little Letter",
-
-    date:
-        "September 11 · Day 6",
-
-    flower:
-        "🌙",
-
-    poem: `
-
-        <p>
-            When the day becomes quiet
-            and the stars appear,
-            I hope this little message
-            finds you.
-        </p>
-
-    `,
-
-    images: [
-
-        "images/day6-photo1.jpg",
-
-        "images/day6-photo2.jpg",
-
-        "images/day6-photo3.jpg"
-
-    ]
-
-},
-
-
-7: {
-
-    title:
-        "Almost There",
-
-    date:
-        "September 12 · Day 7",
-
-    flower:
-        "🌸",
-
-    poem: `
-
-        <p>
-            The days are getting smaller,
-            the birthday is getting closer,
-            and there are still
-            a few secrets left.
-        </p>
-
-    `,
-
-    images: [
-
-        "images/day7-photo1.jpg",
-
-        "images/day7-photo2.jpg",
-
-        "images/day7-photo3.jpg"
-
-    ]
-
-},
-
-
-8: {
-
-    title:
-        "Tomorrow",
-
-    date:
-        "September 13 · Day 8",
-
-    flower:
-        "🪻",
-
-    poem: `
-
-        <p>
-            Tomorrow isn't just another day.
-        </p>
-
-        <p>
-            Tomorrow is your day.
-            And I've been waiting
-            to show you everything.
-        </p>
-
-    `,
-
-    images: [
-
-        "images/day8-photo1.jpg",
-
-        "images/day8-photo2.jpg",
-
-        "images/day8-photo3.jpg"
-
-    ]
-
-},
-
-
-9: {
-
-    title:
-        "Your Birthday",
-
-    date:
-        "September 14 · Birthday",
-
-    flower:
-        "🎂",
-
-    poem: `
-
-        <p>
-            Today is finally here.
-        </p>
-
-        <p>
-            And this little journey
-            has finally reached
-            its favorite page.
-        </p>
-
-        <p>
-            Happy Birthday. 🎂💜
-        </p>
-
-    `,
-
-    images: [
-
-        "images/birthday-photo1.jpg",
-
-        "images/birthday-photo2.jpg",
-
-        "images/birthday-photo3.jpg"
-
-    ]
-
-}
-
-};
-
-
-/* =========================================================
-   OPEN DAILY PAGE
-========================================================= */
-
-function openDay(
-    day,
-    button = null
-){
-
-    const unlocked =
-        getUnlockedDay();
-
-
-    if(day > unlocked){
-
-        alert(
-            "Not yet... 🪻\n\nThis little page is waiting for its day."
-        );
-
-        return;
-
-    }
-
-
-    const data =
-        days[day];
-
-
-    if(!data) return;
-
-
-    document.getElementById(
-        "dailyTitle"
-    ).innerText =
-        data.title;
-
-
-    document.getElementById(
-        "dailyDate"
-    ).innerText =
-        data.date;
-
-
-    document.getElementById(
-        "dailyFlower"
-    ).innerText =
-        data.flower;
-
-
-    document.getElementById(
-        "poemTitle"
-    ).innerText =
-        data.title;
-
-
-    document.getElementById(
-        "poemText"
-    ).innerHTML =
-        data.poem;
-
-
-    const gallery =
-        document.getElementById(
-            "gallery"
-        );
-
-
-    gallery.innerHTML = "";
-
-
-    data.images.forEach(
-        (image,index) => {
-
-            const slot =
-                document.createElement(
-                    "div"
-                );
-
-            slot.className =
-                "photo-slot";
-
-
-            const img =
-                document.createElement(
-                    "img"
-                );
-
-
-            img.src =
-                image;
-
-
-            img.alt =
-                "Memory " +
-                (index + 1);
-
-
-            /*
-              If your personal image does not
-              exist yet, use a random placeholder.
-            */
-
-            img.onerror =
-                function(){
-
-                    const placeholders = [
-
-                        "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=700&q=80",
-
-                        "https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=700&q=80",
-
-                        "https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=700&q=80"
-
-                    ];
-
-                    this.src =
-                        placeholders[
-                            index %
-                            placeholders.length
-                        ];
-
-                };
-
-
-            slot.appendChild(img);
-
-            gallery.appendChild(slot);
-
-        }
-    );
-
-
-    const nextButton =
-        document.getElementById(
-            "nextDayButton"
-        );
-
-
-    if(day < unlocked){
-
-        nextButton.style.display =
-            "block";
-
-        nextButton.innerText =
-            "Next Day →";
-
-        nextButton.onclick =
-            function(){
-
-                openDay(
-                    day + 1
-                );
-
-            };
-
-    }
-    else {
-
-        nextButton.style.display =
-            "none";
-
-    }
-
-
-    showPage(
-        "dailyPage",
-        button
-    );
-
-}
-
-
-/* =========================================================
-   TODAY'S GIFT
-========================================================= */
-
-function openTodayGift(
-    button = null
-){
-
-    const unlocked =
-        getUnlockedDay();
-
-
-    if(unlocked < 1){
-
-        alert(
-            "The little journey hasn't started yet. 🌱"
-        );
-
-        return;
-
-    }
-
-
-    const today =
-        Math.min(
-            unlocked,
-            9
-        );
-
-
-    const data =
-        days[today];
-
-
-    document.getElementById(
-        "todayDate"
-    ).innerText =
-        data.date;
-
-
-    document.getElementById(
-        "noteDate"
-    ).innerText =
-        data.date.toUpperCase();
-
-
-    /*
-       You can write a different personal note
-       for each day here later.
-    */
-
-    const notes = {
-
-        1: `
-
-            <p>
-                I know this is just a little website,
-                but I wanted to make something that
-                you could open every day.
-            </p>
-
-            <p>
-                So today, this is your first tiny
-                reminder that someone is thinking
-                about you.
-            </p>
-
-            <p>
-                There's still a whole journey ahead,
-                so don't rush through it. 🪻
-            </p>
-
-            <p>
-                Come back tomorrow.
-                I'll have something new waiting.
-            </p>
-
-        `,
-
-        2: `
-
-            <p>
-                Day two already. 🌷
-            </p>
-
-            <p>
-                I hope this little corner of the
-                internet made your day a tiny bit
-                brighter.
-            </p>
-
-            <p>
-                And yes...
-                there's more waiting.
-            </p>
-
-        `,
-
-        3: `
-
-            <p>
-                Here's another tiny note for you. 🌸
-            </p>
-
-            <p>
-                Sometimes the smallest surprises
-                are the ones that stay in our
-                memories the longest.
-            </p>
-
-        `,
-
-        4: `
-
-            <p>
-                Another day,
-                another little message.
-            </p>
-
-            <p>
-                I hope you're smiling right now. 💜
-            </p>
-
-        `,
-
-        5: `
-
-            <p>
-                Just a little halfway reminder:
-                you're special.
-            </p>
-
-            <p>
-                That's all for today.
-                The journey continues tomorrow. 🪻
-            </p>
-
-        `,
-
-        6: `
-
-            <p>
-                Six little days have passed.
-            </p>
-
-            <p>
-                And somehow the birthday is
-                getting closer and closer. ✨
-            </p>
-
-        `,
-
-        7: `
-
-            <p>
-                Almost there.
-            </p>
-
-            <p>
-                I hope you're enjoying these
-                little pieces of the surprise.
-            </p>
-
-        `,
-
-        8: `
-
-            <p>
-                One more day.
-            </p>
-
-            <p>
-                Tomorrow is finally the day.
-                🎂💜
-            </p>
-
-        `,
-
-        9: `
-
-            <p>
-                Today is your day.
-            </p>
-
-            <p>
-                And now there's one final surprise
-                waiting for you.
-            </p>
-
-            <p>
-                Happy Birthday. 🎂🪻
-            </p>
-
-        `
-
-    };
-
-
-    document.getElementById(
-        "todayNote"
-    ).innerHTML =
-        notes[today];
-
-
-    showPage(
-        "todayPage",
-        button
-    );
-
-}
-
-
-/* =========================================================
-   OPEN MEGA SURPRISE
-========================================================= */
-
-function openMega(
-    button = null
-){
-
-    const unlocked =
-        getUnlockedDay();
-
-
-    if(unlocked < 9){
-
-        alert(
-            "Almost... 💜\n\nThe Mega Surprise opens on September 14."
-        );
-
-        return;
-
-    }
-
-
-    showPage(
-        "megaPage",
-        button
-    );
-
-}
-
-
-/* =========================================================
-   UPDATE SIDEBAR
-========================================================= */
-
-function setupDashboard(){
-
-    const unlocked =
-        getUnlockedDay();
-
-
-    for(
-        let day = 1;
-        day <= 9;
-        day++
-    ){
-
-        const nav =
-            document.getElementById(
-                "day" + day + "Nav"
-            );
-
-
-        if(!nav) continue;
-
-
-        if(day <= unlocked){
-
-            nav.classList.remove(
-                "locked"
-            );
-
-
-            const icon =
-                nav.querySelector(
-                    ".nav-icon"
-                );
-
-
-            if(day === 9){
-
-                icon.innerText =
-                    "🎂";
-
-            }
-            else {
-
-                icon.innerText =
-                    "🌷";
-
-            }
-
-        }
-        else {
-
-            nav.classList.add(
-                "locked"
-            );
-
-        }
-
-    }
-
-
-    /* =====================================================
-       MEGA SURPRISE STATUS
-    ===================================================== */
-
-    const megaNav =
-        document.getElementById(
-            "megaNav"
-        );
-
-
-    const megaIcon =
-        document.getElementById(
-            "megaIcon"
-        );
-
-
-    const megaTitle =
-        document.getElementById(
-            "megaTitle"
-        );
-
-
-    const megaText =
-        document.getElementById(
-            "megaText"
-        );
-
-
-    const megaButton =
-        document.getElementById(
-            "megaButton"
-        );
-
-
-    const megaBox =
-        document.getElementById(
-            "megaBox"
-        );
-
-
-    if(unlocked >= 9){
-
-        megaNav.classList.remove(
-            "locked"
-        );
-
-
-        megaNav.querySelector(
-            ".nav-icon"
-        ).innerText =
-            "🎁";
-
-
-        megaIcon.innerText =
-            "✨";
-
-
-        megaTitle.innerText =
-            "Your Mega Surprise Is Ready";
-
-
-        megaText.innerText =
-            "It's finally time. Everything is waiting inside. 💜";
-
-
-        megaButton.disabled =
-            false;
-
-
-        megaButton.innerText =
-            "Open Mega Surprise 🎁";
-
-
-        megaBox.classList.add(
-            "unlocked"
-        );
-
-    }
-
-    else {
-
-        megaNav.classList.add(
-            "locked"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   PREVENT LOCKED NAVIGATION
-========================================================= */
-
-document
-    .querySelectorAll(".nav-item.locked")
-    .forEach(item => {
-
-        item.addEventListener(
-            "click",
-            function(){
-
-                if(
-                    this.id !== "megaNav"
-                ){
-
-                    alert(
-                        "This little surprise isn't ready yet. 💜\n\nCome back on its day."
-                    );
-
-                }
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-setupDashboard();
-
+/* ==========================================================
+   START WEBSITE
+   ========================================================== */
+
+createNavigation();
+showHome();
 
 </script>
-
 
 </body>
 </html>
